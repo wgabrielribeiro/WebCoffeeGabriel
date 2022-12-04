@@ -1,0 +1,81 @@
+.conteudo-Login{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10%;
+}
+
+.conteudo-form{
+ border-radius: 10px;
+ background-color: #fff;
+ box-shadow: 0 30px 60px 0 gray;
+ text-align: center;
+ width: 45%;
+ height: 350px;
+ transition: all 0.5s ease-in-out;
+}
+
+.conteudo-form:hover{
+  box-shadow: 0 30px 60px 0 rgb(49, 49, 49);
+}
+
+.input-Login{
+  background-color: #f6f6f6;
+  border: none;
+  color: black;
+  padding: 15px 0px;
+  text-align: center;
+  font-size: 16px;
+  margin: 5px;
+  width: 90%;
+  border: 2px #f6f6f6;
+  transition: all 0.5s ease-in-out;
+  border-radius: 5px 5px 5px 5px;
+}
+
+.mensagem-erro {
+  font-size: 14px;
+  color: red;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.input-submit{
+  background-color: #ffab62;
+  border: none;
+  color: white;
+  padding: 15px 0px;
+  margin-top: 5px;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 13px;
+  box-shadow: 0 10px 30px 0 #8B4513;
+  border-radius: 5px 5px 5px 5px;
+  transition: all 0.3s ease-in-out;
+  width: 60%;
+  cursor: pointer;
+}
+
+@media (min-width: 1300px)
+{
+  .row {
+    padding: 1rem;
+    padding-left: 14rem;
+  }
+}
+
+@media (min-width: 1110px) and (max-width: 1280px)
+{
+  .row {
+    padding: 1rem;
+    padding-left: 10rem;
+  }
+}
+
+@media (max-width: 1100px)
+{
+  .row {
+    padding: 1rem;
+    padding-left: 3rem;
+  }
+}
+

@@ -1,0 +1,86 @@
+<body>
+  <!-- Nav Inicio -->
+  <div class="container-fluid p-0 nav-bar">
+    <nav class="navbar navbar-expand-lg bg-none navbar-dark py-3">
+      <a href="#" routerLink="/login" routerLinkActive="active" class="navbar-brand px-lg-4 m-0">
+        <h1 class="m-0 display-4 text-uppercase text-white">Gabriel Coffee</h1>
+      </a>
+      <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <!-- <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+        <div class="navbar-nav ml-auto p-4">
+          <a href="#" routerLink="/home" routerLinkActive="active" class="nav-item nav-link active">Inicio</a>
+          <a href="#" routerLink="/about" routerLinkActive="active" class="nav-item nav-link">Sobre</a>
+          <a href="#" routerLink="/servicos" routerLinkActive="active" class="nav-item nav-link">Serviços</a>
+          <a href="#" routerLink="/produtos" routerLinkActive="active" class="nav-item nav-link">Menu</a>
+          <a href="#" routerLink="/contato" routerLinkActive="active" class="nav-item nav-link">Contato</a>
+        </div>
+      </div> -->
+    </nav>
+  </div>
+  <div class="container-fluid page-header mb-5 position-relative overlay-bottom">
+    <div class="d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5" style="min-height: 400px">
+      <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase">Reset Senha</h1>
+      <div class="d-inline-flex mb-lg-5">
+        <p class="m-0 text-white"><a class="text-white" href="" routerLink="/login">Login</a></p>
+        <p class="m-0 text-white px-2">/</p>
+        <p class="m-0 text-white">Reset Senha</p>
+      </div>
+    </div>
+  </div>
+  <!--NAv Fim -->
+
+  <div class="conteudo-cadastro">
+    <form class="conteudo-form container-fluid" [formGroup]="ResetForm" (submit)="submitReset()">
+      <div class="form-row row">
+        <div class="col-6 align-items-center">
+            <label for="basic-url" class="form-label">Email</label>
+          <div class="input-group mb-3">
+            <span class="input-group-text " id="basic-addon3">@</span>
+            <input type="email" class="form-control" id="email1" formControlName="email"
+              aria-describedby="basic-addon3">
+          </div>
+          <div class="mensagem-erro"
+            *ngIf="ResetForm.get('email')?.errors?.['required'] && ResetForm.get('email')?.touched">
+            Campo Email Obrigatorio!
+          </div>
+          <div class="mensagem-erro"
+            *ngIf="ResetForm.get('email')?.errors?.['email'] && ResetForm.get('email')?.touched">
+            Formato do Email não é válido!
+          </div>
+        </div>
+
+      </div>
+      <div class="form-row row">
+        <div class="col-6">
+          <label for="inputPassword4">Senha</label>
+          <input type="password" class="form-control" id="inputPassword4" formControlName="Password"
+            placeholder="Senha">
+          <div class="mensagem-erro"
+            *ngIf="ResetForm.get('password')?.errors?.['required'] && ResetForm.get('Password')?.touched">
+            Campo Obrigatorio!
+          </div>
+        </div>
+      </div>
+      <div class="form-row row">
+        <div class="col-6">
+          <label for="inputPassword4">Confirme a senha</label>
+          <input type="password" class="form-control" id="inputConfirmeSenha" formControlName="RePassword"
+            placeholder="Confirme a Senha">
+          <div class="mensagem-erro"
+            *ngIf="ResetForm.get('RePassword')?.errors?.['required'] && ResetForm.get('RePassword')?.touched">
+            Campo Obrigatorio!
+          </div>
+        </div>
+      </div>
+      <div class="form-row row">
+        <div class="col-4">
+          <button type="submit" class="btn btn-primary input-submit" [disabled]="!ResetForm.valid">Resetar Senha</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <app-footer></app-footer>
+</body>

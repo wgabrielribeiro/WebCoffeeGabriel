@@ -1,0 +1,32 @@
+<body>
+  <app-navMenu></app-navMenu>
+  <div class="container-fluid page-header mb-5 position-relative overlay-bottom">
+    <div class="d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5" style="min-height: 400px">
+      <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase">Pagamento</h1>
+    </div>
+  </div>
+
+  <div class="d-flex flex-column wrapper">
+
+      <main class="flex-fill">
+          <div class="container text-center">
+              <h1>Obrigado por comprar com a gente, {{userName}}!</h1>
+              <hr>
+              <h3>Anote o número de seu pedido:</h3>
+              <h2 class="text-dark"><b>{{numPedido}}</b></h2>
+              <p>Em até 2 horas, seu pedido será entregue. Qualquer dúvida sobre este pedido, entre em contato conosco e informe o número do pedido para que possamos te ajudar.</p>
+              <p>Tenha um ótimo dia!</p>
+              <p>
+                  Atenciosamente,<br>
+                  Equipe Gabriel Coffee Online
+              </p>
+              <p>
+                  <a routerLink="/perfil" class="btn btn-primary btn-lg text-white">Ir aos Pedidos</a>
+              </p>
+          </div>
+      </main>
+
+  </div>
+  <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <app-footer></app-footer>
+</body>

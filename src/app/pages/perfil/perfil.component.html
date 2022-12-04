@@ -1,0 +1,242 @@
+<body>
+  <app-navMenu></app-navMenu>
+  <div class="container-fluid page-header mb-5 position-relative overlay-bottom">
+    <div class="d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5" style="min-height: 400px">
+      <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase">Usuario: {{userName}}</h1>
+      <div class="d-inline-flex mb-lg-5">
+        <p class="m-0 text-white"><a class="text-white" href="" routerLink="/home">Inicio</a></p>
+        <p class="m-0 text-white px-2">/</p>
+        <p class="m-0 text-white">Perfil</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container text-center">
+    <div class="row">
+      <div class="col-sm-8 text-left">
+        <div class="text-left pt-lg-5 mb-5">
+          <h2 class="text-left">Pedidos</h2>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="text-center pt-lg-5 mb-5">
+          <h2 class="text-center">Dados Cadastrais</h2>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-8 text-left" *ngIf="pedidoVazio">
+        <h4>Você ainda não possui pedidos</h4>
+      </div>
+      <div class="col-sm-8 text-left" *ngIf="!pedidoVazio">
+        <h4>Ultimos Pedidos:</h4>
+        <ul class="list-group mb-1" *ngFor="let produto of listPedido">
+          <li class="list-group-item py-3 border-dark" >
+            <div class="row g-3">
+              <div class="col-4 col-md-3 col-lg-2">
+                <a>
+                  <img src="./assets/{{produto.nm_Imagem}}" class="img-thumbnail">
+                </a>
+              </div>
+              <div class="col-3 col-md-5 col-lg-2 col-xl-6 text-left align-self-center">
+                <h4>
+                  <b><a class="text-decoration-none">
+                      {{produto.nm_Produto}}</a></b>
+                </h4>
+                <p class="text-decoration-none border-dark">Quantidade: {{produto.qntSelecionado}}</p>
+
+                  <h3 class="text-decoration-none text-secondary"><b>Valor Total Item: {{produto.vlTotal}}</b></h3><br>
+              </div>
+
+
+            </div>
+          </li>
+        </ul>
+      </div>
+
+
+      <div class="col-sm-4">
+        <div class="row text-center">
+          <dt for="inpEmail" class="form-label ">Email Cadastrado</dt>
+          <input type="text" id="inpEmail" class="form-control text-center" placeholder="{{email}}"
+            aria-label="First name" disabled="true">
+        </div>
+        <div class="row mt-5">
+          <aside class="text-center">
+            <button class="btn btn-primary text-white" (click)="lgModal.show()">Ver ou Editar Dados cadastrais</button>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="container-fluid col-10">
+    <div class="text-center pt-lg-5 mb-5">
+      <h2 class="text-center">Dados Cadastrais</h2>
+    </div>
+    <form class="row g-3">
+        <div class="col-3">
+          <label for="inpNome" class="form-label">Email Cadastrado</label>
+          <input type="text" id="inpNome" class="form-control" placeholder="{{email}}" aria-label="First name" disabled="true">
+        </div>
+    </form>
+    <div class="row mt-5">
+      <aside class="text-left">
+        <button class="btn btn-primary text-white" (click)="lgModal.show()">Ver ou Editar Dados cadastrais</button>
+      </aside>
+    </div>
+  </div> -->
+
+
+  <div bsModal #lgModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 id="dialog-sizes-name1" class="modal-title pull-left">Dados Cadastrais</h4>
+          <button type="button" class="btn-close close pull-right" (click)="lgModal.hide()" aria-label="Close">
+            <span aria-hidden="true" class="visually-hidden">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="col-12">
+            <form class="row g-3" [formGroup]="formCad" (submit)="submitCadastro()">
+              <div class="col-5">
+                <label for="inpNome" class="form-label">Nome</label>
+                <input type="text" id="inpNome" class="form-control" placeholder="Digite seu nome"
+                  formControlName="Nome" aria-label="First name">
+                <div class="mensagem-erro"
+                  *ngIf="formCad.get('Nome')?.errors?.['required'] && formCad.get('Nome')?.touched">
+                  <p style="color: red;">Nome Obrigatório!</p>
+                </div>
+              </div>
+              <div class="col-3">
+                <label for="inpDoc" class="form-label">Documento</label>
+                <input type="text" id="inpDoc" class="form-control" placeholder="Digite seu CPF" aria-label="documento"
+                  formControlName="DOCUMENTO">
+                  <div class="mensagem-erro" *ngIf="DOCUMENTO && formCad.get('DOCUMENTO')?.touched">
+                    <p style="color: red;">Documento Inválido!</p>
+                  </div>
+                <div class="mensagem-erro"
+                  *ngIf="formCad.get('DOCUMENTO')?.errors?.['required'] && formCad.get('DOCUMENTO')?.touched">
+                  <p style="color: red;">Documento Obrigatório!</p>
+                </div>
+              </div>
+              <div class="col-4">
+                <label for="inpdate" class="form-label">Data de Nascimento</label>
+                <input type="date" id="inpdate" class="form-control" placeholder="{{dataNasc}}" aria-label="data"
+                  formControlName="Dt_Nascimento">
+                <div class="mensagem-erro"
+                  *ngIf="formCad.get('Dt_Nascimento')?.errors?.['required'] && formCad.get('Dt_Nascimento')?.touched">
+                  <p style="color: red;">Data de Nascimento Obrigatório!</p>
+                </div>
+              </div>
+
+
+              <div class="col-4">
+                <label for="inpTelefone" class="form-label">Telefone</label>
+                <input type="tel" id="inpTelefone" class="form-control" placeholder="Digite seu Telefone" aria-label="Telefone"
+                  formControlName="TELEFONE">
+                <div class="mensagem-erro"
+                  *ngIf="formCad.get('TELEFONE')?.errors?.['required'] && formCad.get('TELEFONE')?.touched">
+                  <p style="color: red;">Telefone Obrigatório!</p>
+                </div>
+              </div>
+
+              <div class="col-5">
+                <label for="inpRua" class="form-label">Rua</label>
+                <input type="text" class="form-control" id="inpRua" placeholder="Digite sua rua" aria-label="Rua"
+                  formControlName="RUA">
+                <div class="mensagem-erro"
+                  *ngIf="formCad.get('RUA')?.errors?.['required'] && formCad.get('RUA')?.touched">
+                  <p style="color: red;">Rua Obrigatório!</p>
+                </div>
+              </div>
+              <div class="col-3">
+                <label for="inpnumero" class="form-label">Número</label>
+                <input type="number" class="form-control" id="inpnumero" placeholder="Digite seu numero"
+                  formControlName="NUMERO" aria-label="Telefone">
+                <div class="mensagem-erro"
+                  *ngIf="formCad.get('NUMERO')?.errors?.['required'] && formCad.get('NUMERO')?.touched">
+                  <p style="color: red;">Numero Obrigatório!</p>
+                </div>
+              </div>
+
+              <div class="col-4">
+                <label for="inputAddress2" class="form-label">Complemento</label>
+                <input type="text" class="form-control" id="inputAddress2" placeholder="Digite seu complemento"
+                  formControlName="COMPLEMENTO">
+              </div>
+              <div class="col-4">
+                <label for="inputAddress" class="form-label">Bairro</label>
+                <input type="text" class="form-control" id="inputAddress" placeholder="Digite seu bairro"
+                  formControlName="BAIRRO">
+                <div class="mensagem-erro"
+                  *ngIf="formCad.get('BAIRRO')?.errors?.['required'] && formCad.get('BAIRRO')?.touched">
+                  <p style="color: red;">Bairro Obrigatório!</p>
+                </div>
+              </div>
+              <div class="col-4">
+                <label for="inputCity" class="form-label">Cidade</label>
+                <input type="text" class="form-control" id="inputCity" placeholder="Digite sua cidade"
+                  formControlName="CIDADE">
+                <div class="mensagem-erro"
+                  *ngIf="formCad.get('CIDADE')?.errors?.['required'] && formCad.get('CIDADE')?.touched">
+                  <p style="color: red;">Cidade Obrigatório!</p>
+                </div>
+              </div>
+
+
+              <div class="col-4">
+                <label for="inputState" class="form-label">Estado</label>
+                <select id="inputState" class="form-select" formControlName="ESTADO">
+                  <option selected ngDefaultControl>Escolha um estado</option>
+                  <option *ngFor="let item of items">
+                    {{item}}
+                  </option>
+                </select>
+              </div>
+              <div class="col-2">
+                <label for="inputZip" class="form-label">Cep</label>
+                <input type="text" class="form-control" id="inputZip" formControlName="CEP" placeholder="Digite seu CEP"
+                (blur)="fnConsultaCEP()">
+                <div class="mensagem-erro"
+                  *ngIf="formCad.get('CEP')?.errors?.['required'] && formCad.get('CEP')?.touched">
+                  <p style="color: red;">CEP Obrigatório!</p>
+                </div>
+              </div>
+              <div class="col-2">
+                <label for="inputPais" class="form-label">País</label>
+                <input type="text" class="form-control" id="inputPais" formControlName="PAIS" placeholder="Digite seu país">
+              </div>
+              <!-- <div class="col-12">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="gridCheck">
+                  <label class="form-check-label" for="gridCheck">
+                    Concordo com tudo aqui
+                  </label>
+                </div>
+              </div> -->
+              <div class="col-12">
+                <button type="submit" class="btn btn-primary text-white" [disabled]="!formCad.valid"
+                *ngIf="condicaoCad == false">Salvar</button>
+                <button type="button" class="btn btn-primary text-white" *ngIf="condicaoCad == true"
+                [disabled]="!formCad.valid"
+                (click)="fnAtualizarCad()">Atualizar</button>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <app-footer></app-footer>
+  <script type="text/javascript">
+    $(".date").datepicker({
+      format: "dd/mm/yyyy",
+    });
+  </script>
+</body>

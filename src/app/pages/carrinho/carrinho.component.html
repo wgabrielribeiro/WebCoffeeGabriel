@@ -1,0 +1,227 @@
+<body>
+  <app-navMenu></app-navMenu>
+  <div class="container-fluid page-header mb-5 position-relative overlay-bottom">
+    <div class="d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5" style="min-height: 400px">
+      <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase">Carrinho de Compras</h1>
+      <div class="d-inline-flex mb-lg-5">
+        <p class="m-0 text-white"><a class="text-white" href="" routerLink="/home">Inicio</a></p>
+        <p class="m-0 text-white px-2">/</p>
+        <p class="m-0 text-white">Carrinho</p>
+      </div>
+    </div>
+  </div>
+
+  <main class="flex-fill">
+    <div class="container" *ngIf="carrinhoVazio">
+      <h1>Carrinho de Compras</h1>
+      <ul class="list-group mb-3" *ngFor="let produto of ListaProdutos">
+        <li class="list-group-item py-3">
+          <div class="row g-3">
+            <div class="col-4 col-md-3 col-lg-2">
+              <a href="#">
+                <img src="./assets/{{produto.nm_Imagem}}" class="img-thumbnail">
+              </a>
+            </div>
+            <div class="col-8 col-md-9 col-lg-7 col-xl-8 text-left align-self-center">
+              <h4>
+                <b><a class="text-decoration-none">
+                    {{produto.nm_Produto}}</a></b>
+              </h4>
+              <h5>
+                Descrição: {{produto.descricao_Produto}}
+              </h5>
+              <h5>
+                <b>
+                  Categoria: {{produto.categoria}}
+                </b>
+              </h5>
+            </div>
+            <div
+              class="col-6 offset-6 col-sm-6 offset-sm-6 col-md-4 offset-md-8 col-lg-3 offset-lg-0 col-xl-2 align-self-center mt-3">
+              <div class="input-group">
+                <button (click)="fnDeletarItem(produto.cod_Produto)" class="btn btn-outline-dark btn-sm" type="button">
+                  <i class="fa-solid fa-minus"></i>
+                  <!-- <i class="bi-caret-down" style="font-size: 16px; line-height: 16px;"></i> -->
+                </button>
+                <input type="text" class="form-control text-center border-dark" value="{{produto.qntSelecionado}}">
+                <button (click)="fnCarrinho(produto)" class="btn btn-outline-dark btn-sm" type="button">
+                  <!-- <i class="bi-caret-up" style="font-size: 16px; line-height: 16px;"></i> -->
+                  <i class="fa-solid fa-plus"></i>
+                </button>
+                <!-- <button class="btn btn-outline-danger border-dark btn-sm" type="button">
+                  <i class="bi-trash" style="font-size: 16px; line-height: 16px;"></i>
+                </button> -->
+              </div>
+              <div class="text-end mt-2">
+                <small class="text-secondary">Valor Total Item: {{produto.vlTotal}}</small><br>
+                <span class="text-dark"><b>Valor Item: R$ {{produto.preco}}</b></span>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+      <div class="list-group-item py-3">
+        <div class="text-end">
+          <h4 class="text-dark mb-3">
+            Valor Total: {{calculo}},00
+          </h4>
+          <a routerLink="/produtos" class="btn btn-outline-dark btn-lg">
+            Continuar Comprando
+          </a>
+          <a (click)="lgModal.show()" class="btn btn-primary btn-lg text-white">Fechar Compra</a>
+        </div>
+      </div>
+    </div>
+    <div class="container" *ngIf="!carrinhoVazio">
+      <h1 class="text-center">Carrinho Vazio</h1>
+      <div class="list-group-item py-3">
+        <div class="text-end">
+          <button type="button" routerLink="/produtos" class="btn btn-danger btn-lg ms-2 mt-xs-3">Voltar ao
+            menu</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+
+
+  <div bsModal #lgModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 id="dialog-sizes-name1" class="modal-title pull-left">Dados Cadastrais</h4>
+          <button type="button" class="btn-close close pull-right" (click)="lgModal.hide()" aria-label="Close">
+            <span aria-hidden="true" class="visually-hidden">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="col-12">
+            <form class="row g-3" [formGroup]="formCad" (submit)="submitCadastro()">
+              <div class="col-5">
+                <label for="inpNome" class="form-label">Nome</label>
+                <input type="text" id="inpNome" class="form-control" placeholder="Digite seu nome"
+                  formControlName="Nome" aria-label="First name">
+                <div class="mensagem-erro"
+                  *ngIf="formCad.get('Nome')?.errors?.['required'] && formCad.get('Nome')?.touched">
+                  <p style="color: red;">Nome Obrigatório!</p>
+                </div>
+              </div>
+              <div class="col-3">
+                <label for="inpDoc" class="form-label">Documento</label>
+                <input type="text" id="inpDoc" class="form-control" placeholder="Digite seu CPF" aria-label="documento"
+                  formControlName="DOCUMENTO">
+                <div class="mensagem-erro" *ngIf="DOCUMENTO && formCad.get('DOCUMENTO')?.touched">
+                  <p style="color: red;">Documento Inválido!</p>
+                </div>
+                <div class="mensagem-erro"
+                  *ngIf="formCad.get('DOCUMENTO')?.errors?.['required'] && formCad.get('DOCUMENTO')?.touched">
+                  <p style="color: red;">Documento Obrigatório!</p>
+                </div>
+              </div>
+              <div class="col-4">
+                <label for="inpdate" class="form-label">Data de Nascimento</label>
+                <input type="date" id="inpdate" class="form-control" placeholder="{{dataNasc}}" aria-label="data"
+                  formControlName="Dt_Nascimento">
+                <div class="mensagem-erro"
+                  *ngIf="formCad.get('Dt_Nascimento')?.errors?.['required'] && formCad.get('Dt_Nascimento')?.touched">
+                  <p style="color: red;">Data de Nascimento Obrigatório!</p>
+                </div>
+              </div>
+
+
+              <div class="col-4">
+                <label for="inpTelefone" class="form-label">Telefone</label>
+                <input type="tel" id="inpTelefone" class="form-control" placeholder="Digite seu Telefone"
+                  aria-label="Telefone" formControlName="TELEFONE">
+                <div class="mensagem-erro"
+                  *ngIf="formCad.get('TELEFONE')?.errors?.['required'] && formCad.get('TELEFONE')?.touched">
+                  <p style="color: red;">Telefone Obrigatório!</p>
+                </div>
+              </div>
+
+              <div class="col-5">
+                <label for="inpRua" class="form-label">Rua</label>
+                <input type="text" class="form-control" id="inpRua" placeholder="Digite sua rua" aria-label="Rua"
+                  formControlName="RUA">
+                <div class="mensagem-erro"
+                  *ngIf="formCad.get('RUA')?.errors?.['required'] && formCad.get('RUA')?.touched">
+                  <p style="color: red;">Rua Obrigatório!</p>
+                </div>
+              </div>
+              <div class="col-3">
+                <label for="inpnumero" class="form-label">Número</label>
+                <input type="number" class="form-control" id="inpnumero" placeholder="Digite seu numero"
+                  formControlName="NUMERO" aria-label="Telefone">
+                <div class="mensagem-erro"
+                  *ngIf="formCad.get('NUMERO')?.errors?.['required'] && formCad.get('NUMERO')?.touched">
+                  <p style="color: red;">Numero Obrigatório!</p>
+                </div>
+              </div>
+
+              <div class="col-4">
+                <label for="inputAddress2" class="form-label">Complemento</label>
+                <input type="text" class="form-control" id="inputAddress2" placeholder="Digite seu complemento"
+                  formControlName="COMPLEMENTO">
+              </div>
+              <div class="col-4">
+                <label for="inputAddress" class="form-label">Bairro</label>
+                <input type="text" class="form-control" id="inputAddress" placeholder="Digite seu bairro"
+                  formControlName="BAIRRO">
+                <div class="mensagem-erro"
+                  *ngIf="formCad.get('BAIRRO')?.errors?.['required'] && formCad.get('BAIRRO')?.touched">
+                  <p style="color: red;">Bairro Obrigatório!</p>
+                </div>
+              </div>
+              <div class="col-4">
+                <label for="inputCity" class="form-label">Cidade</label>
+                <input type="text" class="form-control" id="inputCity" placeholder="Digite sua cidade"
+                  formControlName="CIDADE">
+                <div class="mensagem-erro"
+                  *ngIf="formCad.get('CIDADE')?.errors?.['required'] && formCad.get('CIDADE')?.touched">
+                  <p style="color: red;">Cidade Obrigatório!</p>
+                </div>
+              </div>
+
+
+              <div class="col-4">
+                <label for="inputState" class="form-label">Estado</label>
+                <select id="inputState" class="form-select" formControlName="ESTADO">
+                  <option selected ngDefaultControl>Escolha um estado</option>
+                  <option *ngFor="let item of items">
+                    {{item}}
+                  </option>
+                </select>
+              </div>
+              <div class="col-2">
+                <label for="inputZip" class="form-label">Cep</label>
+                <input type="text" class="form-control" id="inputZip" formControlName="CEP" placeholder="Digite seu CEP"
+                  (blur)="fnConsultaCEP()">
+                <div class="mensagem-erro"
+                  *ngIf="formCad.get('CEP')?.errors?.['required'] && formCad.get('CEP')?.touched">
+                  <p style="color: red;">CEP Obrigatório!</p>
+                </div>
+              </div>
+              <div class="col-2">
+                <label for="inputPais" class="form-label">País</label>
+                <input type="text" class="form-control" id="inputPais" formControlName="PAIS"
+                  placeholder="Digite seu país">
+              </div>
+              <div class="col-6">
+                <button type="submit" class="btn btn-primary text-white" [disabled]="!formCad.valid"
+                  *ngIf="condicaoCad == false">Salvar</button>
+                <button type="button" class="btn btn-primary text-white" *ngIf="condicaoCad == true"
+                  [disabled]="!formCad.valid" (click)="fnAtualizarCad()">Atualizar</button>
+              </div>
+              <div class="col-6" style="text-align: right;">
+                <button type="submit" routerLink="/pagamento" class="btn btn-primary text-white" [disabled]="!formCad.valid">Avançar para pagamento</button>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-footer></app-footer>
+</body>

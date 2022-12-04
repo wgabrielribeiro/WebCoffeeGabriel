@@ -1,0 +1,54 @@
+<body>
+  <div class="container-fluid p-0 nav-bar">
+    <nav class="navbar navbar-expand-lg bg-none navbar-dark py-3">
+      <a href="#" routerLink="/home" routerLinkActive="active" class="navbar-brand px-lg-4 m-0">
+        <h1 class="m-0 display-4 text-uppercase text-white badge bg-secondary">Gabriel Coffee</h1>
+      </a>
+      <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+        <div class="navbar-nav ml-auto p-4">
+          <a href="#" routerLink="/home" routerLinkActive="active" class="nav-item nav-link active">Inicio</a>
+          <a href="#" routerLink="/about" routerLinkActive="active" class="nav-item nav-link">Sobre</a>
+          <a href="#" routerLink="/contato" routerLinkActive="active" class="nav-item nav-link">Contato</a>
+          <a href="#" routerLink="/servicos" routerLinkActive="active" class="nav-item nav-link">Serviços</a>
+          <a href="#" routerLink="/produtos" routerLinkActive="active" class="nav-item nav-link">Menu</a>
+          <a href="#" routerLink="/perfil" routerLinkActive="active" class="nav-item nav-link">Perfil</a>
+          <a href="#" (click)="fnLogout()" routerLink="/login" routerLinkActive="active" class="nav-item nav-link">Sair</a>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <!-- Carousel Start -->
+  <div class="container-fluid p-0 mb-5">
+    <div id="blog-carousel" class="carousel slide overlay-bottom" data-ride="carousel">
+      <div class="carousel-inner">
+        <owl-carousel-o [options]='customOptions'
+          style="transition: all 1.5s ease 0s; width: 3800px; transform: translate3d(-760px, 0px, 0px);">
+          <ng-template carouselSlide>
+            <div class="carousel-item active">
+              <img class="w-100" src="./assets/carousel-1.jpg" alt="Image">
+              <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                <h2 class="text-primary font-weight-medium m-0">Servindo a você</h2>
+                <h1 class="display-1 text-white m-0">Café</h1>
+                <h2 class="text-white m-0">* Desde 1950 *</h2>
+              </div>
+            </div>
+          </ng-template>
+          <ng-template carouselSlide>
+            <div class="carousel-item active">
+              <img class="w-100" src="./assets/carousel-2.jpg" alt="Image">
+              <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                <h2 class="text-primary font-weight-medium m-0">Servindo a você</h2>
+                <h1 class="display-1 text-white m-0">Café</h1>
+                <h2 class="text-white m-0">* Desde 1950 *</h2>
+              </div>
+            </div>
+          </ng-template>
+        </owl-carousel-o>
+      </div>
+    </div>
+  </div>
+  <!-- Carousel End -->
+</body>

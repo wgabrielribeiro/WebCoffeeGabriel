@@ -1,0 +1,19 @@
+<body id="ii">
+  <label class="switch">
+    <input type="checkbox" id="eeee" />
+    <span class="slider"></span>
+  </label>
+  <script src="./themejs/theme.js" type="text/javascript">
+
+  const input = document.getElementById("eeee");
+  const body = document.getElementById("ii");
+
+  const toggleThemeMode = () => {
+    body.classList.toggle("dark");
+  };
+
+  input.onchange = toggleThemeMode;
+
+
+  </script>
+</body>

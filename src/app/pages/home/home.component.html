@@ -1,0 +1,139 @@
+<body #scroll>
+  <app-nav></app-nav>
+
+  <!-- Testimonial Start -->
+  <div class="container-fluid py-5">
+    <div class="container">
+      <div class="section-title">
+        <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">Testemunhas</h4>
+        <h1 class="display-4">Nossos clientes dizem</h1>
+      </div>
+      <div class="testimonial-carousel">
+        <owl-carousel-o [options]='customOptions'
+          style="transition: all 1.5s ease 0s; width: 3800px; transform: translate3d(-760px, 0px, 0px);">
+          <ng-template carouselSlide>
+            <div class="d-flex align-items-center mb-3">
+              <img class="img-fluid" src="./assets/testimonial-1.jpg" alt="">
+              <div class="ml-3">
+                <h4>Fernanda</h4>
+                <i>Designer</i>
+              </div>
+            </div>
+            <p class="m-0">Um dos melhores cafés da região!</p>
+          </ng-template>
+          <ng-template carouselSlide>
+            <div class="d-flex align-items-center mb-3">
+              <img class="img-fluid" src="./assets/testimonial-2.jpg" alt="">
+              <div class="ml-3">
+                <h4>Bruno</h4>
+                <i>Desenvolvedor</i>
+              </div>
+            </div>
+            <p class="m-0">Amo este lugar, o melhor café que já experimentei.</p>
+          </ng-template>
+          <ng-template carouselSlide class="testimonial-item">
+            <div class="d-flex align-items-center mb-3">
+              <img class="img-fluid" src="./assets/testimonial-3.jpg" alt="">
+              <div class="ml-3">
+                <h4>Gabriela</h4>
+                <i>Jornalista</i>
+              </div>
+            </div>
+            <p class="m-0">Sem palavras para o café e principalmente o atendimento. Nota 10!</p>
+          </ng-template>
+          <ng-template carouselSlide class="testimonial-item">
+            <div class="d-flex align-items-center mb-3">
+              <img class="img-fluid" src="./assets/testimonial-4.jpg" alt="">
+              <div class="ml-3">
+                <h4>Gabriel</h4>
+                <i>Executivo</i>
+              </div>
+            </div>
+            <p class="m-0">Um dos meus lugares preferidos para distrair a mente e tomar um belo café. Nota 10!</p>
+          </ng-template>
+        </owl-carousel-o>
+        <!-- <div class="testimonial-item">
+          <div class="d-flex align-items-center mb-3">
+            <img class="img-fluid" src="./assets/testimonial-1.jpg" alt="">
+            <div class="ml-3">
+              <h4>Client Name</h4>
+              <i>Profession</i>
+            </div>
+          </div>
+          <p class="m-0">Sed ea amet kasd elitr stet, stet rebum et ipsum est duo elitr eirmod clita lorem. Dolor tempor
+            ipsum sanct clita</p>
+        </div>
+        <div class="testimonial-item">
+          <div class="d-flex align-items-center mb-3">
+            <img class="img-fluid" src="./assets/testimonial-2.jpg" alt="">
+            <div class="ml-3">
+              <h4>Client Name</h4>
+              <i>Profession</i>
+            </div>
+          </div>
+          <p class="m-0">Sed ea amet kasd elitr stet, stet rebum et ipsum est duo elitr eirmod clita lorem. Dolor tempor
+            ipsum sanct clita</p>
+        </div>
+        <div class="testimonial-item">
+          <div class="d-flex align-items-center mb-3">
+            <img class="img-fluid" src="./assets/testimonial-3.jpg" alt="">
+            <div class="ml-3">
+              <h4>Client Name</h4>
+              <i>Profession</i>
+            </div>
+          </div>
+          <p class="m-0">Sed ea amet kasd elitr stet, stet rebum et ipsum est duo elitr eirmod clita lorem. Dolor tempor
+            ipsum sanct clita</p>
+        </div>
+        <div class="testimonial-item">
+          <div class="d-flex align-items-center mb-3">
+            <img class="img-fluid" src="./assets/testimonial-4.jpg" alt="">
+            <div class="ml-3">
+              <h4>Client Name</h4>
+              <i>Profession</i>
+            </div>
+          </div>
+          <p class="m-0">Sed ea amet kasd elitr stet, stet rebum et ipsum est duo elitr eirmod clita lorem. Dolor tempor
+            ipsum sanct clita</p>
+        </div> -->
+      </div>
+    </div>
+  </div>
+  <!-- Testimonial End -->
+
+  <!-- Back to Top -->
+  <!-- <a (click)="fnScrollTop()" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="fa fa-angle-double-up"></i></a> -->
+
+  <app-footer></app-footer>
+
+  <!-- <script>
+    $(window).scroll(function () {
+      if ($(this).scrollTop() > 100) {
+          $('.back-to-top').fadeIn('slow');
+      } else {
+          $('.back-to-top').fadeOut('slow');
+      }
+  });
+  $('.back-to-top').click(function () {
+      $('html, body').animate({scrollTop: 0}, 1500, 'easeInOutExpo');
+      return false;
+  });
+  </script> -->
+
+  <script src="js/main.js"></script>
+  <!-- JavaScript Libraries -->
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script
+    src="//cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.4/build/jquery.datetimepicker.full.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+  <script src="lib/easing/easing.min.js"></script>
+  <script src="lib/waypoints/waypoints.min.js"></script>
+  <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+  <script src="lib/tempusdominus/js/moment.min.js"></script>
+  <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+  <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+  <!-- Contact Javascript File -->
+  <script src="mail/jqBootstrapValidation.min.js"></script>
+  <script src="mail/contact.js"></script>
+</body>
